@@ -5,7 +5,7 @@ import materialize from 'materialize-css/dist/js/materialize.min.js';
 import './App.css'
 
 import SearchBar from './components/layout/SearchBar';
-import LogsList from './components/logs/LogsList';
+import LogsList from './components/systemLogs/SystemLogsList';
 
 const App = () => {
   useEffect(() => {

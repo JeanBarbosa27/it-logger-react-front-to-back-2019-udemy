@@ -15,7 +15,9 @@ const App = () => {
   return (
     <>
       <SearchBar />
-      <LogsList />
+      <div className="container">
+        <LogsList />
+      </div>
     </>
   )
 }

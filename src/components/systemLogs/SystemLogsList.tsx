@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 
+import Preloader from '../layout/Preloader';
 import ISystemLog from './ISystemLog';
 import SystemLogItem from './SystemLogItem';
 
@@ -12,8 +13,11 @@ const SystemLogsList = () => {
     const response = await fetch('http://localhost:5000/logs');
     const data = await response.json();
 
-    setLoading(false);
-    setLogs(data);
+    // Mocks data being fethed
+    setTimeout(() => {
+      setLoading(false);
+      setLogs(data);
+    }, 500);
   }
 
   useEffect(() => {
@@ -21,22 +25,18 @@ const SystemLogsList = () => {
   }, [])
 
   if (loading) {
-    return <h4>Loading...</h4>
+    return <Preloader />
   }
 
   return (
-    <ul className="collection-with-header">
+    <ul className="collection with-header">
       <li className="collection-header">
         <h4 className="center">System Logs</h4>
       </li>
       {
         !loading && logs.length === 0
           ? (<li>There is no logs yet...</li>)
-          : logs.map((log: ISystemLog) => (
-            <li key={log.id.toString()}>
-              <SystemLogItem log={log} />
-            </li>
-          ))
+          : logs.map((log: ISystemLog) => <SystemLogItem log={log} key={log.id.toString()} />)
       }
     </ul>
   )

@@ -1,0 +1,11 @@
+.children-space-1>*:not(:last-child) {
+  margin-right: 0.5rem;
+}
+
+.delete-button {
+  transition: color 250ms ease-in-out;
+}
+
+.delete-button:hover {
+  color: #F44336;
+}

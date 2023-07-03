@@ -3,9 +3,10 @@
 }
 
 .delete-button {
-  transition: color 250ms ease-in-out;
+  transition: color 250ms ease-in-out, font-size 200ms linear;
 }
 
 .delete-button:hover {
   color: #F44336;
+  font-size: 1.8rem;
 }

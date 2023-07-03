@@ -36,7 +36,9 @@ const SystemLogsList = () => {
       {
         !loading && logs.length === 0
           ? (<li>There is no logs yet...</li>)
-          : logs.map((log: ISystemLog) => <SystemLogItem log={log} key={log.id.toString()} />)
+          : logs.map((log: ISystemLog) => (
+            <li className="collection-item" key={log.id.toString()}><SystemLogItem log={log} /></li>
+          ))
       }
     </ul>
   )

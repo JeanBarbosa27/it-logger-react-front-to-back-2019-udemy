@@ -21,7 +21,7 @@ const SystemLogAddModal = () => {
   return (
     <div id="add-log-modal" className="modal" style={modalStyle}>
       <div className="modal-content">
-        <h4>Enter System Log</h4>
+        <h4>Add System Log</h4>
 
         <div className="row">
           <div className="input-field">
@@ -68,7 +68,7 @@ const SystemLogAddModal = () => {
         </div>
 
         <div className="modal-footer">
-          <a href="#!" className="modal-close waves-effect waves-light btn blue" onClick={onSubmit}>Enter</a>
+          <a href="#!" className="modal-close waves-effect waves-light btn blue" onClick={onSubmit}>Add</a>
         </div>
       </div>
     </div>

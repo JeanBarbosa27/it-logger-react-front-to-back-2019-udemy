@@ -6,8 +6,11 @@ import './App.css'
 
 import SearchBar from './components/layout/SearchBar';
 import AddButton from './components/layout/AddButton';
-import LogsList from './components/systemLogs/SystemLogsList';
+import SystemLogsList from './components/systemLogs/SystemLogsList';
 import SystemLogAddModal from './components/systemLogs/SystemLogAddModal';
+import SystemLogEditModal from './components/systemLogs/SystemLogEditModal';
+import TechsAddModal from './components/techs/TechsAddModal';
+import TechsListModal from './components/techs/TechsListModal';
 
 const App = () => {
   useEffect(() => {
@@ -20,7 +23,10 @@ const App = () => {
       <div className="container">
         <AddButton />
         <SystemLogAddModal />
-        <LogsList />
+        <SystemLogEditModal />
+        <TechsAddModal />
+        <TechsListModal />
+        <SystemLogsList />
       </div>
     </>
   )

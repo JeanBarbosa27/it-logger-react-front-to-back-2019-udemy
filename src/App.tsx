@@ -1,8 +1,11 @@
 import { useEffect } from 'react';
+import { Provider } from 'react-redux';
 import 'materialize-css/dist/css/materialize.min.css';
 import materialize from 'materialize-css/dist/js/materialize.min.js';
 
 import './App.css'
+
+import store from './store';
 
 import SearchBar from './components/layout/SearchBar';
 import AddButton from './components/layout/AddButton';
@@ -18,7 +21,7 @@ const App = () => {
     materialize.AutoInit();
   });
   return (
-    <>
+    <Provider store={store}>
       <SearchBar />
       <div className="container">
         <AddButton />
@@ -28,7 +31,7 @@ const App = () => {
         <TechsListModal />
         <SystemLogsList />
       </div>
-    </>
+    </Provider>
   )
 }
 

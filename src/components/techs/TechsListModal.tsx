@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import ITech from './ITech';
+import ITech from '../../interfaces/ITech';
 import TechsItem from './TechsItem';
 
 const TechsListModal = () => {

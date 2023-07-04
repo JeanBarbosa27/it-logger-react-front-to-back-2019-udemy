@@ -1,4 +1,4 @@
-import ISystemLog from './ISystemLog';
+import ISystemLog from '../../interfaces/ISystemLog';
 
 interface ISystemLogItemParams {
   log: ISystemLog;

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import Preloader from '../layout/Preloader';
-import ISystemLog from './ISystemLog';
+import ISystemLog from '../../interfaces/ISystemLog';
 import SystemLogItem from './SystemLogItem';
 
 const SystemLogsList = () => {

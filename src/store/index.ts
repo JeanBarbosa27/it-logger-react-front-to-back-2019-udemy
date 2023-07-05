@@ -5,7 +5,7 @@ import systemLogReducer from './reducers/systemLogReducer';
 
 const store = configureStore({
   reducer: {
-    systemLogReducer,
+    systemLog: systemLogReducer,
   },
 });
 

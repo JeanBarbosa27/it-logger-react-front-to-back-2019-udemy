@@ -5,35 +5,78 @@ import ISystemLog from '../../interfaces/ISystemLog';
 import { RootState } from '../index';
 
 const initialState: ISystemLogState = {
+  current: null,
+  error: null,
+  firstLoad: true,
   loading: false,
-  logs: [],
+  logs: null,
 }
 
 export const systemLogReducer = createSlice({
-  name: 'systemLogs',
+  name: 'systemLog',
   initialState,
   reducers: {
     addLog: (state, action: PayloadAction<ISystemLog>) => {
-      state.logs.push(action.payload)
+      state.logs?.push(action.payload);
+    },
+    addLogsInBatch: (state, action: PayloadAction<Array<ISystemLog>>) => {
+      if (state.firstLoad) {
+        state.logs = action.payload;
+
+        return;
+      }
+
+      if (!state.logs) {
+        state.logs = [];
+      }
+
+      action.payload.forEach(log => state.logs?.push(log))
     },
     updateLog: (state, action: PayloadAction<ISystemLog>) => {
-      const logToUpdateIndex = state.logs.findIndex(log => log.id == action.payload.id);
-      state.logs[logToUpdateIndex] = action.payload;
+      state.logs?.forEach(log => {
+        if (log.id == action.payload.id) {
+          log = action.payload;
+        }
+      })
     },
     deleteLog: (state, action: PayloadAction<number>) => {
-      state.logs = state.logs.filter(log => log.id != action.payload);
+      if (state.logs) {
+        state.logs = state.logs.filter(log => log.id != action.payload);
+      }
+    },
+    setError: (state, action: PayloadAction<string>) => {
+      state.error = action.payload;
+    },
+    setFirstLoad: (state, action: PayloadAction<boolean>) => {
+      state.firstLoad = action.payload;
+    },
+    setLoading: (state, action: PayloadAction<boolean>) => {
+      state.loading = action.payload
+    },
+    clearLogs: state => {
+      state = initialState
     },
   }
 });
 
-export const { deleteLog, addLog } = systemLogReducer.actions;
-export const getLogs = (state: RootState) => state.systemLogReducer.logs;
+export const {
+  addLog,
+  addLogsInBatch,
+  updateLog,
+  deleteLog,
+  setError,
+  setFirstLoad,
+  setLoading,
+  clearLogs
+} = systemLogReducer.actions;
+export const getLogs = (state: RootState) => state.systemLog.logs;
 export const getLogById = (state: RootState, action: PayloadAction<number>) => {
-  return state.systemLogReducer.logs.find(log => log.id == action.payload);
+  return state.systemLog.logs?.find(log => log.id == action.payload);
 }
 export const filterLogsByTech = (state: RootState, action: PayloadAction<string>) => {
-  return state.systemLogReducer.logs.filter(log => log.tech == action.payload);
+  return state.systemLog.logs?.filter(log => log.tech == action.payload);
 }
-export const isLoadng = (state: RootState) => state.systemLogReducer.loading;
+export const isFirstLoad = (state: RootState) => state.systemLog.firstLoad;
+export const isLoading = (state: RootState) => state.systemLog.loading;
 
 export default systemLogReducer.reducer;

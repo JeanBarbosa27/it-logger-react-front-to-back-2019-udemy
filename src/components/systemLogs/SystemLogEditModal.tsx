@@ -8,14 +8,14 @@ const SystemLogEditModal = () => {
 
   const onSubmit = () => {
     if (!message || !tech) {
-      materialize.toast({ html: "Please fill in the message and the technician" })
-    } else {
-      console.log(`Sending a new log with message: "${message}", tech: "${tech}" and if it needs attention: "${attention}"`);
-
-      setAttention(false)
-      setMessage("")
-      setTech("")
+      return materialize.toast({ html: "Please fill in the message and the technician" })
     }
+
+    console.log(`Sending a new log with message: "${message}", tech: "${tech}" and if it needs attention: "${attention}"`);
+
+    setAttention(false)
+    setMessage("")
+    setTech("")
   }
 
   return (

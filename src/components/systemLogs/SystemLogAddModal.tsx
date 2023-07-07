@@ -1,16 +1,23 @@
 import { useState } from "react";
 import materialize from 'materialize-css/dist/js/materialize.min.js';
 
+import { useAppDispatch } from '../../store/hooks';
+import { addLog } from '../../store/reducers/systemLogReducer';
+
 const SystemLogAddModal = () => {
   const [attention, setAttention] = useState(false);
   const [message, setMessage] = useState("");
   const [tech, setTech] = useState("");
+
+  const dispatch = useAppDispatch()
 
   const onSubmit = () => {
     if (!message || !tech) {
       materialize.toast({ html: "Please fill in the message and the technician" })
     } else {
       console.log(`Sending a new log with message: "${message}", tech: "${tech}" and if it needs attention: "${attention}"`);
+
+      dispatch(addLog({ attention, date: new Date().toISOString(), message, tech }))
 
       setAttention(false)
       setMessage("")

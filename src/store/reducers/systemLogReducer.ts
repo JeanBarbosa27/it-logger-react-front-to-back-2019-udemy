@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import ISystemLogState from '../../interfaces/ISystemLogState';
-import ISystemLog from '../../interfaces/ISystemLog';
+import ISystemLog, { ISystemLogDTO } from '../../interfaces/ISystemLog';
 import { RootState } from '../index';
 
 const initialState: ISystemLogState = {
@@ -11,6 +11,9 @@ const initialState: ISystemLogState = {
   loading: false,
   logs: null,
 }
+
+const reducerName = 'systemLog';
+const baseURL = 'http://localhost:5000/logs';
 
 // Selectors
 export const getLogs = (state: RootState) => state.systemLog.logs;
@@ -25,36 +28,34 @@ export const isLoading = (state: RootState) => state.systemLog.loading;
 
 // Async Thunk actions
 export const fetchLogs = createAsyncThunk(
-  'systemLog/fetchLogs',
+  `${reducerName}/fetchLogs`,
   async () => {
-    const response = await fetch('http://localhost:5000/logs');
+    const response = await fetch(baseURL);
 
-    return (await response.json()) as Array<ISystemLog>;
+    return (await response.json());
   }
 );
 
+export const addLog = createAsyncThunk(
+  `${reducerName}/addLog`,
+  async (log: ISystemLogDTO) => {
+    const response = await fetch(baseURL, {
+      method: 'POST',
+      body: JSON.stringify(log),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    return (await response.json())
+  }
+)
+
 // Reducer slices
 export const systemLogReducer = createSlice({
-  name: 'systemLog',
+  name: reducerName,
   initialState,
   reducers: {
-    addLog(state, action: PayloadAction<ISystemLog>) {
-      state.logs?.push(action.payload);
-    },
-    addLogsInBatch(state, action: PayloadAction<Array<ISystemLog>>) {
-      if (state.firstLoad) {
-        state.logs = action.payload;
-        setFirstLoad(false);
-
-        return;
-      }
-
-      if (!state.logs) {
-        state.logs = [];
-      }
-
-      action.payload.forEach(log => state.logs?.push(log))
-    },
     updateLog(state, action: PayloadAction<ISystemLog>) {
       state.logs?.forEach(log => {
         if (log.id == action.payload.id) {
@@ -93,12 +94,13 @@ export const systemLogReducer = createSlice({
         state.loading = false;
         state.error = action.payload as string;
       })
+      .addCase(addLog.fulfilled, (state, action) => {
+        state.logs?.push(action.payload);
+      })
   }
 });
 
 export const {
-  addLog,
-  addLogsInBatch,
   updateLog,
   deleteLog,
   setError,

@@ -1,30 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import Preloader from '../layout/Preloader';
 import ISystemLog from '../../interfaces/ISystemLog';
 import SystemLogItem from './SystemLogItem';
 
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
+import { getLogs, isLoading, fetchLogs } from '../../store/reducers/systemLogReducer';
+
 const SystemLogsList = () => {
-  const [loading, setLoading] = useState(false);
-  const [logs, setLogs] = useState<ISystemLog[]>([]);
-
-  const getLogs = async () => {
-    setLoading(true);
-    const response = await fetch('http://localhost:5000/logs');
-    const data = await response.json();
-
-    // Mocks data being fethed
-    setTimeout(() => {
-      setLoading(false);
-      setLogs(data);
-    }, 500);
-  }
+  const dispatch = useAppDispatch();
+  const logs = useAppSelector(getLogs);
+  const loading = useAppSelector(isLoading);
 
   useEffect(() => {
-    getLogs();
+    dispatch(fetchLogs())
   }, [])
 
-  if (loading) {
+  if (loading || logs === null) {
     return <Preloader />
   }
 

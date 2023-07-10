@@ -1,21 +1,46 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import materialize from 'materialize-css/dist/js/materialize.min.js';
 
+import { useAppSelector, useAppDispatch } from '../../store/hooks';
+import { getCurrentLog, updateLog } from "../../store/reducers/systemLogReducer";
+
 const SystemLogEditModal = () => {
+  const currentLog = useAppSelector(getCurrentLog);
+  const dispatch = useAppDispatch();
+
   const [attention, setAttention] = useState(false);
   const [message, setMessage] = useState("");
   const [tech, setTech] = useState("");
 
-  const onSubmit = () => {
+  useEffect(() => {
+    console.log('current', currentLog);
+    if (currentLog) {
+      setAttention(currentLog.attention);
+      setMessage(currentLog.message);
+      setTech(currentLog.tech);
+    }
+  }, [currentLog])
+
+  const onSubmit = async () => {
+    if (!currentLog) return;
+
     if (!message || !tech) {
       return materialize.toast({ html: "Please fill in the message and the technician" })
     }
 
-    console.log(`Sending a new log with message: "${message}", tech: "${tech}" and if it needs attention: "${attention}"`);
+    const logToUpdate = {
+      id: currentLog.id,
+      message,
+      tech,
+      attention,
+      date: new Date().toISOString(),
+    }
 
-    setAttention(false)
-    setMessage("")
-    setTech("")
+    await dispatch(updateLog(logToUpdate));
+
+    setAttention(false);
+    setMessage("");
+    setTech("");
   }
 
   return (

@@ -19,7 +19,8 @@ const App = () => {
   useEffect(() => {
     // Initialize all instances of materialize to be used in script files
     materialize.AutoInit();
-  });
+  }, []);
+
   return (
     <Provider store={store}>
       <SearchBar />

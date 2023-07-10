@@ -10,16 +10,16 @@
     {
       "id": 2,
       "message": "Fixed hard drive on workstation 002",
-      "attention": true,
       "tech": "John Doe",
-      "date": "2019-05-31T16:18:04.245Z"
+      "attention": false,
+      "date": "2023-07-10T09:29:57.351Z"
     },
     {
-      "attention": true,
-      "date": "2023-07-07T13:13:22.036Z",
-      "message": "Living Room Workstation isn't connected to wifi",
+      "id": 3,
+      "message": "Living Room Workstation wifi isn't working again",
       "tech": "John Doe",
-      "id": 3
+      "attention": true,
+      "date": "2023-07-10T08:58:32.226Z"
     }
   ],
   "techs": [

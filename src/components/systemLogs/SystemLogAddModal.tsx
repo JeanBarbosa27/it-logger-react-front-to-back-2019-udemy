@@ -11,17 +11,18 @@ const SystemLogAddModal = () => {
 
   const dispatch = useAppDispatch()
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     if (!message || !tech) {
       materialize.toast({ html: "Please fill in the message and the technician" })
     } else {
       console.log(`Sending a new log with message: "${message}", tech: "${tech}" and if it needs attention: "${attention}"`);
 
-      dispatch(addLog({ attention, date: new Date().toISOString(), message, tech }))
+      await dispatch(addLog({ attention, date: new Date().toISOString(), message, tech }));
+      materialize.toast({ html: `Log added by ${tech}` });
 
-      setAttention(false)
-      setMessage("")
-      setTech("")
+      setAttention(false);
+      setMessage("");
+      setTech("");
     }
   }
 

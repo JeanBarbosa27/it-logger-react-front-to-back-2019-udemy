@@ -10,7 +10,7 @@ const baseURL = 'http://localhost:5000/techs';
 const setDefaultHeadersAndBody = (tech: ITechDTO) => {
   return {
     body: JSON.stringify(tech),
-    Headers: {
+    headers: {
       'Content-Type': 'application/json',
     },
   }
@@ -36,8 +36,6 @@ export const addTech = createAsyncThunk(
       ...setDefaultHeadersAndBody(tech),
     });
 
-    // FIXME: For some reason JSON Server is returning only the id on payload. It shouldn't happen
-    // TODO: Try to fix on JSON server, by the way it will be replaced by a back-end with Node and Express
     return (await response.json());
   },
 );

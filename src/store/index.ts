@@ -2,10 +2,12 @@
 
 import { configureStore } from '@reduxjs/toolkit';
 import systemLogReducer from './reducers/systemLogReducer';
+import techReducer from './reducers/techReducers';
 
 const store = configureStore({
   reducer: {
     systemLog: systemLogReducer,
+    tech: techReducer,
   },
 });
 

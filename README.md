@@ -36,6 +36,21 @@ React application. You can also run each of them separately by the following com
 
 There isn't any deploy for now.
 
-## Roadmap
+## Roadmap of my own ideas
 
-- Adapt back-end from JSON Server to have Node with Express and mongo to turn it into a MERN stack;
+- [ ] Adapt back-end from JSON Server to have Node in TypeScript with Express and mongo to turn it into a MERN stack;
+- [ ] Add mobile first approach;
+- [ ] Add history for each log, which should be increased each time the user updates it after it has been created;
+- [ ] Add "Show details" to each history item, which should go to another page and show all that was in the log on that moment;
+- [ ] Add a description field () to the log form, which should be optional to fill, to explain deeper the problem / solution;
+- [ ] Abstract both forms from add and edit log to a new component, which can be used by both;
+- [ ] Show alerts for errors;
+- [ ] Add a new button to keep adding more logs / techs without closing the modal;
+- [ ] Add a check box to delete in batch for logs and techs lists;
+- [ ] Add filter by date (from / to);
+- [ ] Add filter by requires attention;
+- [ ] Add filter by technician;
+- [ ] Add order by field with asc and desc (tech, date,);
+- [ ] Add register / login / logout features;
+- [ ] Add favicon;
+- [ ] Deploy it, maybe on Render or another with free tier;

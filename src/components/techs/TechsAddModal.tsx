@@ -1,15 +1,21 @@
 import { useState } from "react";
 import materialize from 'materialize-css/dist/js/materialize.min.js';
 
+import { useAppDispatch } from "../../store/hooks";
+import { addTech } from "../../store/reducers/techReducers";
+
 const TechsAddModal = () => {
+  const dispatch = useAppDispatch();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     if (!firstName || !lastName) {
       materialize.toast({ html: "Please fill in first and last name" })
     } else {
-      console.log(`Adding a new tech with name: "${firstName} ${lastName}"`);
+      await dispatch(addTech({ firstName, lastName }));
+      materialize.toast({ html: `Technician ${firstName} ${lastName} added!` })
+
       setFirstName('');
       setLastName('');
     }
@@ -40,10 +46,11 @@ const TechsAddModal = () => {
               value={lastName}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => setLastName(event.target.value)}
             />
-            <label htmlFor="lastName" className="active">First Name</label>
+            <label htmlFor="lastName" className="active">Last Name</label>
           </div>
         </div>
 
+        {/* TODO: Should be interesting having two buttons, one for add and close and other to add and keep adding */}
         <div className="modal-footer">
           <a href="#!" className="modal-close waves-effect waves-light btn blue" onClick={onSubmit}>Add</a>
         </div>

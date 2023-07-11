@@ -1,23 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
-import ITech from '../../interfaces/ITech';
 import TechsItem from './TechsItem';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { fetchTechs, getTechs } from '../../store/reducers/techReducers';
 
 const TechsListModal = () => {
-  const [techs, setTechs] = useState<Array<ITech>>([])
-  const [loading, setLoading] = useState(false)
-
-  const getTechs = async () => {
-    setLoading(true)
-    const response = await fetch('http://localhost:5000/techs');
-    const data = await response.json()
-
-    setTechs(data);
-    setLoading(false);
-  }
+  const dispatch = useAppDispatch();
+  const techs = useAppSelector(getTechs);
 
   useEffect(() => {
-    getTechs()
+    dispatch(fetchTechs())
     //eslint-disable-next-line
   }, [])
 
@@ -27,9 +19,9 @@ const TechsListModal = () => {
         <h4>Technician List</h4>
         <ul className="collection">
           {
-            !loading && techs.length === 0
+            techs !== null && techs.length === 0
               ? (<li>There is no technicians added yet...</li>)
-              : techs.map((tech) => (
+              : techs?.map((tech) => (
                 <li className="collection-item" key={tech.id.toString()}><TechsItem tech={tech} /></li>
               ))
           }

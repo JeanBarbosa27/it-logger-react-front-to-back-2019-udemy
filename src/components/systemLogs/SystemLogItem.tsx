@@ -1,21 +1,12 @@
 import materialize from 'materialize-css/dist/js/materialize.min.js';
 
 import ISystemLog from '../../interfaces/ISystemLog';
+import { formatDate } from '../../utils/strings/dates';
 import { useAppDispatch } from '../../store/hooks';
 import { deleteLog, setCurrentLog } from '../../store/reducers/systemLogReducer';
 
 interface ISystemLogItemParams {
   log: ISystemLog;
-}
-
-const formatDate = (date: string): String => {
-  // TODO: Turn it into a utils
-  const time = Date.parse(date);
-
-  return new Intl.DateTimeFormat(
-    'en-GB',
-    { dateStyle: 'medium', timeStyle: 'medium', timeZone: 'Europe/London' }
-  ).format(time);
 }
 
 const SystemLogItem = ({ log }: ISystemLogItemParams) => {

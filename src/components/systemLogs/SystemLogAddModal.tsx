@@ -1,10 +1,12 @@
 import { useState } from "react";
 import materialize from 'materialize-css/dist/js/materialize.min.js';
 
-import { useAppDispatch } from '../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { addLog } from '../../store/reducers/systemLogReducer';
+import { getTechs } from "../../store/reducers/techReducers";
 
 const SystemLogAddModal = () => {
+  const techs = useAppSelector(getTechs);
   const [attention, setAttention] = useState(false);
   const [message, setMessage] = useState("");
   const [tech, setTech] = useState("");
@@ -52,9 +54,10 @@ const SystemLogAddModal = () => {
               onChange={(event: React.ChangeEvent<HTMLSelectElement>) => setTech(event.target.value)}
             >
               <option value="" disabled>Select technician</option>
-              <option value="John Doe">John Doe</option>
-              <option value="Jen Williams">Jen Williams</option>
-              <option value="Sam Smith">Sam Smith</option>
+              {techs && techs.map(tech => {
+                const techFullName = `${tech.firstName} ${tech.lastName}`;
+                return (<option value={techFullName}>{techFullName}</option>)
+              })}
             </select>
           </div>
         </div>

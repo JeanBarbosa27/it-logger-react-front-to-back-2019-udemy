@@ -3,8 +3,10 @@ import materialize from 'materialize-css/dist/js/materialize.min.js';
 
 import { useAppSelector, useAppDispatch } from '../../store/hooks';
 import { getCurrentLog, updateLog } from "../../store/reducers/systemLogReducer";
+import { getTechs } from "../../store/reducers/techReducers";
 
 const SystemLogEditModal = () => {
+  const techs = useAppSelector(getTechs);
   const currentLog = useAppSelector(getCurrentLog);
   const dispatch = useAppDispatch();
 
@@ -13,7 +15,6 @@ const SystemLogEditModal = () => {
   const [tech, setTech] = useState("");
 
   useEffect(() => {
-    console.log('current', currentLog);
     if (currentLog) {
       setAttention(currentLog.attention);
       setMessage(currentLog.message);
@@ -69,9 +70,10 @@ const SystemLogEditModal = () => {
               onChange={(event: React.ChangeEvent<HTMLSelectElement>) => setTech(event.target.value)}
             >
               <option value="" disabled>Select technician</option>
-              <option value="John Doe">John Doe</option>
-              <option value="Jen Williams">Jen Williams</option>
-              <option value="Sam Smith">Sam Smith</option>
+              {techs && techs.map(tech => {
+                const techFullName = `${tech.firstName} ${tech.lastName}`;
+                return (<option value={techFullName}>{techFullName}</option>)
+              })}
             </select>
           </div>
         </div>

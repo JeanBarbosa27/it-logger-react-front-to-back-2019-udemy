@@ -9,6 +9,31 @@ configure the store, using the hooks (in the course he uses the old approach, wh
 
 ## Technologies
 
+- Node
+- Express
+- MongoDB
+- Vite
+- React
+- Redux
+- TypeScript
+
+## Dependencies
+
+Below you can see the list of dependencies used in this project which you must install in order to run it.
+
+### Node
+
+It's the only one which must be installed in your machine before being able to install the other ones, once they
+require `npm` to be installed. Considering that `Vite` is being used as a `client` dependency and
+[its documentation](https://vitejs.dev/guide/#scaffolding-your-first-vite-project), at the moment this files was
+updated, at minimum Node on version 14.18+, 16+ or higher for some features, it's recommended to use the current LTS
+version of it.
+
+### Client
+
+In order to install client dependencies, go to `/client` folder via terminal and run `npm install` or `npm i`. The
+dependencies for this folder are:
+
 - Vite
 - React
 - Redux
@@ -17,16 +42,21 @@ configure the store, using the hooks (in the course he uses the old approach, wh
 - Materealize CSS
 - Material Icons
 
-## Dependencies
+### Server
 
-- Node: It must be at least 14.18+, 16+ or higher depending on the feature will be used from Vite, but it's
-recommended always using the LTS verion.
+In order to install server dependencies, go to `/server` folder via terminal and run `npm install` or `npm i`. The
+dependencies for this folder are:
+
+- TypeScript
+- Express
+- Mongoose
+- Nodemon
 
 ## Run locally
 
-To run the project locally just run in the terminal the command `npm run dev`, and it will setup both JSON Server and
-React application. You can also run each of them separately by the following commands `npm run dev:server` and
-`npm run dev:client` respectively.
+To run the project locally you need to go to open one terminal for each folder `/client` and `/server` and run
+`npm run dev` in each of them. On `/client` it'll setup React application through Vite and on `/server` it'll setup a
+Node server with Express to serve as an API connected with a MongoDB.
 
 ## Deploy
 

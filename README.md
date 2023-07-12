@@ -69,6 +69,7 @@ implemented, it'll be created a PR which will be merged into `main` branch, in o
 history.
 
 - [ ] Adapt back-end from JSON Server to have Node in TypeScript with Express and mongo to turn it into a MERN stack;
+- [ ] Add automated tests for the back-end;
 - [ ] Add mobile first approach;
 - [ ] Add history for each log, which should be increased each time the user updates it after it has been created;
 - [ ] Add "Show details" to each history item, which should go to another page and show all that was in the log on that moment;
@@ -83,4 +84,5 @@ history.
 - [ ] Add order by field with asc and desc (tech, date,);
 - [ ] Add register / login / logout features;
 - [ ] Add favicon;
+- [ ] Add automated tests for the front-end;
 - [ ] Deploy it, maybe on Render or another with free tier;

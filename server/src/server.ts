@@ -1,9 +1,14 @@
 import express, { Express, Response } from 'express';
 import dotenv from 'dotenv';
 
+import ConnectMongoDB from './db/ConnectMongoDB.js';
 import AppRoutes from './routes/index.js';
 
 dotenv.config();
+
+if (!process.env.MONGO_DB_URI) {
+  throw new Error("Couldn't connect to MongoDB due to missing URI");
+}
 
 const app: Express = express();
 const environment = process.env.ENVIRONMENT
@@ -11,6 +16,8 @@ const port = process.env.PORT;
 const router = express.Router();
 
 const { getRoutes } = new AppRoutes(router);
+const connectMongoDB = new ConnectMongoDB(process.env.MONGO_DB_URI);
+connectMongoDB.connect();
 
 app.use(express.json());
 

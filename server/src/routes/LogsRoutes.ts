@@ -1,10 +1,11 @@
 import { Router } from 'express';
 
+import IRoutes from './IRoutes.js';
 import LogsController from '../controllers/LogsController.js';
 
-export default class LogsRoutes {
-  router: Router;
-  controller: LogsController;
+export default class LogsRoutes implements IRoutes {
+  private router: Router;
+  private controller: LogsController;
 
   constructor(router: Router) {
     this.router = router;

@@ -1,18 +1,23 @@
 import { Request, Response } from 'express';
 
-export default class TechsController {
-  public get = (request: Request, response: Response) => {
-    // TODO: Add the logic
+import ICotronller from './IController';
+export default class TechsController implements ICotronller {
+  public get = async (request: Request, response: Response) => {
+    // TODO: Implement logic
+    return response.send({});
   }
 
-  public post = (request: Request, response: Response) => {
-    // TODO: Add the logic
+  public post = async (request: Request, response: Response) => {
+    // TODO: Implement logic
+    return response.send({});
   }
-  public put = (request: Request, response: Response) => {
-    // TODO: Add the logic
+  public put = async (request: Request, response: Response) => {
+    // TODO: Implement logic
+    return response.send({});
   }
 
-  public delete = (request: Request, response: Response) => {
-    // TODO: Add the logic
+  public delete = async (request: Request, response: Response) => {
+    // TODO: Implement logic
+    return response.send({});
   }
 }

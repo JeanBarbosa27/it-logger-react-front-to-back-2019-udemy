@@ -1,19 +1,25 @@
 import { Request, Response } from 'express';
 
-export default class LogsController {
-  public get = (request: Request, Response: Response) => {
-    // TODO: Add logic
+import ICotronller from './IController';
+
+export default class LogsController implements ICotronller {
+  public get = async (request: Request, response: Response) => {
+    // TODO: implement logic
+    return response.send({})
   }
 
-  public post = (request: Request, Response: Response) => {
-    // TODO: Add logic
+  public post = async (request: Request, response: Response) => {
+    // TODO: implement logic
+    return response.send({})
   }
 
-  public put = (request: Request, Response: Response) => {
-    // TODO: Add logic
+  public put = async (request: Request, response: Response) => {
+    // TODO: implement logic
+    return response.send({})
   }
 
-  public delete = (request: Request, Response: Response) => {
-    // TODO: Add logic
+  public delete = async (request: Request, response: Response) => {
+    // TODO: implement logic
+    return response.send({})
   }
 }

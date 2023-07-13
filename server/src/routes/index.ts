@@ -1,12 +1,13 @@
 import { Router } from 'express';
 
+import IRoutes from './IRoutes.js';
 import LogsRoutes from './LogsRoutes.js';
 import TechsRoutes from './TechsRoutes.js';
 
-export default class AppRoutes {
-  router: Router;
-  logsRoutes: LogsRoutes;
-  techsRoutes: TechsRoutes;
+export default class AppRoutes implements IRoutes {
+  private router: Router;
+  private logsRoutes: LogsRoutes;
+  private techsRoutes: TechsRoutes;
 
   constructor(router: Router) {
     this.router = router;

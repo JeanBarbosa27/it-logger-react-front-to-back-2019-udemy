@@ -3,11 +3,11 @@ import { Model, Schema, model } from 'mongoose';
 interface ITech {
   firstName: string;
   lastName: string;
-}
+};
 
 interface ITechMethods {
   fullName(): string;
-}
+};
 
 type ITechModel = Model<ITech, {}, ITechMethods>;
 

@@ -72,7 +72,7 @@ const SystemLogEditModal = () => {
               <option value="" disabled>Select technician</option>
               {techs && techs.map(tech => {
                 const techFullName = `${tech.firstName} ${tech.lastName}`;
-                return (<option value={techFullName}>{techFullName}</option>)
+                return (<option value={techFullName} key={tech.id}>{techFullName}</option>)
               })}
             </select>
           </div>

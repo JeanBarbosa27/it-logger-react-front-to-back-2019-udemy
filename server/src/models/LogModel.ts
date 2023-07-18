@@ -12,9 +12,9 @@ interface ILogMethods {
   findByMessage(): Array<ILog>
 };
 
-type ILogModel = Model<ILog, {}, ILogMethods>;
+export type TLogModel = Model<ILog, {}, ILogMethods>;
 
-const logSchema = new Schema<ILog, ILogModel, ILogMethods>({
+const logSchema = new Schema<ILog, TLogModel, ILogMethods>({
   attention: { type: Boolean, required: true },
   date: { type: String, required: true },
   message: { type: String, required: true },
@@ -29,6 +29,6 @@ logSchema.method('findByMessage', function findByMessage() {
   // TODO: Implement
 });
 
-const logModel = model<ILog, ILogModel>('Log', logSchema);
+const logModel = model<ILog, TLogModel>('Log', logSchema);
 
 export default logModel;

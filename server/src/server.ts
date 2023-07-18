@@ -13,9 +13,8 @@ if (!process.env.MONGO_DB_URI) {
 const app: Express = express();
 const environment = process.env.ENVIRONMENT
 const port = process.env.PORT;
-const router = express.Router();
 
-const { getRoutes } = new AppRoutes(router);
+const appRoutes = new AppRoutes().getRoutes();
 const connectMongoDB = new ConnectMongoDB(process.env.MONGO_DB_URI);
 connectMongoDB.connect();
 
@@ -25,7 +24,7 @@ app.get('/health-check', (_, response: Response) => {
   response.send('Ok');
 });
 
-router.use(getRoutes());
+app.use(appRoutes);
 
 app.listen(port, () => {
   console.log(`Server running on port ${environment === 'development' ? 'http://localhost:' + port : port}`);

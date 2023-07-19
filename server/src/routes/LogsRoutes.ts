@@ -13,7 +13,8 @@ export default class LogsRoutes implements IRoutes {
   }
 
   public getRoutes = () => {
-    this.router.get('/', this.controller.get);
+    this.router.get('/', this.controller.index);
+    this.router.get('/:id', this.controller.get);
     this.router.post('/', this.controller.post);
     this.router.put('/:id', this.controller.put);
     this.router.delete('/:id', this.controller.delete);

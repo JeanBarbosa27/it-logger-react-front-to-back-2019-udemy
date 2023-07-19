@@ -9,7 +9,7 @@ export default class TechsController implements ICotronller {
     this.model = model;
   }
 
-  public get = async (request: Request, response: Response) => {
+  public index = async (request: Request, response: Response) => {
     try {
       const allTechs = await this.model.find();
 
@@ -22,6 +22,10 @@ export default class TechsController implements ICotronller {
         ]
       });
     }
+  }
+
+  public get = async (request: Request, response: Response) => {
+    return response.send({});
   }
 
   public post = async (request: Request, response: Response) => {

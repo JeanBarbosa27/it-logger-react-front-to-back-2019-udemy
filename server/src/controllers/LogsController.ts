@@ -10,10 +10,14 @@ export default class LogsController implements ICotronller {
     this.model = model;
   }
 
-  public get = async (request: Request, response: Response) => {
+  public index = async (request: Request, response: Response) => {
     const allLogs = await this.model.find();
 
     return response.send(allLogs);
+  }
+
+  public get = async (request: Request, response: Response) => {
+    return response.send({});
   }
 
   public post = async (request: Request, response: Response) => {

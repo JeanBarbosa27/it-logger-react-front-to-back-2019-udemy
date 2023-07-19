@@ -10,13 +10,22 @@ export default class TechsController implements ICotronller {
   }
 
   public get = async (request: Request, response: Response) => {
-    const allTechs = await this.model.find();
+    try {
+      const allTechs = await this.model.find();
 
-    return response.send(allTechs);
+      return response.send(allTechs);
+    } catch (error) {
+      return response.status(502).send({
+        errors: [
+          'Could not retrieve technicians due to database connection issues',
+          error,
+        ]
+      });
+    }
   }
 
   public post = async (request: Request, response: Response) => {
-    // TODO: Implement logic
+
     return response.send({});
   }
   public put = async (request: Request, response: Response) => {

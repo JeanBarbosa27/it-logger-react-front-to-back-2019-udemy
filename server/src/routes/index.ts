@@ -14,11 +14,21 @@ export default class AppRoutes implements IRoutes {
     this.techsRoutes = new TechsRoutes();
   }
 
+  public getAvailableRoutes = () => {
+    return [
+      {
+        route: '/logs',
+        handlers: this.logsRoutes.getRoutes(),
+      },
+      {
+        route: '/techs',
+        handlers: this.techsRoutes.getRoutes(),
+      },
+    ];
+  }
+
   public getRoutes = () => {
-    const logsRoutes = this.logsRoutes.getRoutes();
-    const techsRoutes = this.techsRoutes.getRoutes();
-    this.router.use('/logs', logsRoutes);
-    this.router.use('/techs', techsRoutes);
+    this.getAvailableRoutes().forEach(({ route, handlers }) => this.router.use(route, handlers));
 
     return this.router;
   }

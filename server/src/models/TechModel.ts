@@ -20,6 +20,6 @@ techSchema.method('fullName', function fullName() {
   return `${this.firstName} ${this.lastName}`;
 });
 
-const techModel = model<ITech, TTechModel>('Tech', techSchema);
+const techModel = model<ITech, TTechModel>('technician', techSchema);
 
 export default techModel

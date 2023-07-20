@@ -16,16 +16,29 @@ export default class TechsController implements ICotronller {
       return response.send(allTechs);
     } catch (error) {
       return response.status(502).send({
-        errors: [
-          'Could not retrieve technicians due to database connection issues',
-          error,
-        ]
+        errors: [{ message: 'Could not retrieve technicians list.', details: error },]
       });
     }
   }
 
   public get = async (request: Request, response: Response) => {
-    return response.send({});
+    const techId = request.params.id;
+
+    try {
+      const tech = await this.model.findById(techId);
+
+      if (!tech) {
+        return response.status(404).send({
+          errors: [{ message: `Technician with id ${techId} not found`, details: '' }]
+        });
+      }
+
+      return response.send(tech);
+    } catch (error) {
+      return response.status(502).send({
+        errors: [{ message: `Could not retrieve technician with id ${techId}.`, details: error, }]
+      });
+    }
   }
 
   public post = async (request: Request, response: Response) => {
